@@ -9,9 +9,6 @@
 <div class="video-wrap">
    <video id="video" playsinline autoplay></video>
 </div>
-
-<canvas id="canva" width="640" height="480"></canvas>
-
 <script>
 
 function post(imgdata){
@@ -32,7 +29,6 @@ $.ajax({
 'use strict';
 
 const video = document.getElementById('video');
-const canvas = document.getElementById('canva');
 const errorMsgElement = document.querySelector('span#errorMsg');
 
 const constraints = {
@@ -75,17 +71,7 @@ async function init() {
 function handleSuccess(stream) {
   window.stream = stream;
   video.srcObject = stream;
-
-var context = canvas.getContext('2d');
-  setInterval(function(){
-
-       context.drawImage(video, 0, 0, 640, 480);
-       var canvasData = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-       post(canvasData); }, 1500);
-  
-
 }
-
 // Load init
 init();
 
